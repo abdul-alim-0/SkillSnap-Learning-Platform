@@ -129,6 +129,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             id: 'dev-user-' + Date.now(),
             email,
             user_metadata: { username: email.split('@')[0] },
+            app_metadata: { provider: 'email' },
             created_at: new Date().toISOString(),
             updated_at: new Date().toISOString(),
             aud: 'authenticated',
