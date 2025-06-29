@@ -8,9 +8,20 @@ import { RoadmapsSection } from './dashboard/RoadmapsSection';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Brain, Calendar, Map, Download, Smartphone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { downloadApp } from '@/lib/utils';
+import { toast } from 'sonner';
 
 export function Dashboard() {
   const [activeTab, setActiveTab] = useState('explain');
+
+  const handleDownload = async (type: 'apk' | 'exe') => {
+    try {
+      await downloadApp(type);
+      toast.success(`${type.toUpperCase()} file download started`);
+    } catch (error) {
+      toast.error('Failed to download file. Please try again later.');
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-100">
@@ -36,11 +47,21 @@ export function Dashboard() {
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="outline" className="border-2">
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="border-2"
+              onClick={() => handleDownload('apk')}
+            >
               <Smartphone className="mr-2 w-5 h-5" />
               Download APK
             </Button>
-            <Button size="lg" variant="outline" className="border-2">
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="border-2"
+              onClick={() => handleDownload('exe')}
+            >
               <Download className="mr-2 w-5 h-5" />
               Download for Desktop
             </Button>

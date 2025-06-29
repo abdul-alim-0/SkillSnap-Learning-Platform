@@ -5,9 +5,20 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { AuthModal } from '@/components/auth/AuthModal';
 import { Brain, Calendar, Map, Zap, Shield, Users, Download, Smartphone } from 'lucide-react';
+import { downloadApp } from '@/lib/utils';
+import { toast } from 'sonner';
 
 export function LandingPage() {
   const [authModal, setAuthModal] = useState<'login' | 'signup' | null>(null);
+
+  const handleDownload = async (type: 'apk' | 'exe') => {
+    try {
+      await downloadApp(type);
+      toast.success(`${type.toUpperCase()} file download started`);
+    } catch (error) {
+      toast.error('Failed to download file. Please try again later.');
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-100">
@@ -125,11 +136,21 @@ export function LandingPage() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Button size="lg" variant="outline" className="text-lg px-8 py-4 border-2">
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="text-lg px-8 py-4 border-2"
+              onClick={() => handleDownload('apk')}
+            >
               <Smartphone className="mr-2 w-5 h-5" />
               Download APK
             </Button>
-            <Button size="lg" variant="outline" className="text-lg px-8 py-4 border-2">
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="text-lg px-8 py-4 border-2"
+              onClick={() => handleDownload('exe')}
+            >
               <Download className="mr-2 w-5 h-5" />
               Download for Desktop
             </Button>
