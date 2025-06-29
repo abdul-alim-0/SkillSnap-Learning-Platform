@@ -5,17 +5,17 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-// Function to download APK or EXE file
-export const downloadApp = async (type: 'apk' | 'exe') => {
+// Function to download APK or ZIP file
+export const downloadApp = async (type: 'apk' | 'zip') => {
   try {
     // Replace these URLs with your actual file URLs
     const fileUrls = {
       apk: '/skillsnap.apk',  // APK file in public folder
-      exe: '/skillsnap.exe'   // EXE file in public folder
+      zip: '/skillsnap.zip'   // ZIP file in public folder
     };
 
     const url = fileUrls[type];
-    const fileName = type === 'apk' ? 'skillsnap.apk' : 'skillsnap.exe';
+    const fileName = type === 'apk' ? 'skillsnap.apk' : 'skillsnap.zip';
 
     // Create a temporary anchor element
     const link = document.createElement('a');

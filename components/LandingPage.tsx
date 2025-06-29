@@ -11,7 +11,7 @@ import { toast } from 'sonner';
 export function LandingPage() {
   const [authModal, setAuthModal] = useState<'login' | 'signup' | null>(null);
 
-  const handleDownload = async (type: 'apk' | 'exe') => {
+  const handleDownload = async (type: 'apk' | 'zip') => {
     try {
       await downloadApp(type);
       toast.success(`${type.toUpperCase()} file download started`);
@@ -149,7 +149,7 @@ export function LandingPage() {
               size="lg" 
               variant="outline" 
               className="text-lg px-8 py-4 border-2"
-              onClick={() => handleDownload('exe')}
+              onClick={() => handleDownload('zip')}
             >
               <Download className="mr-2 w-5 h-5" />
               Download for Desktop
