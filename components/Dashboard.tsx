@@ -14,7 +14,7 @@ import { toast } from 'sonner';
 export function Dashboard() {
   const [activeTab, setActiveTab] = useState('explain');
 
-  const handleDownload = async (type: 'apk' | 'zip') => {
+  const handleDownload = async (type: 'apk' | 'zip' | 'exe') => {
     try {
       await downloadApp(type);
       toast.success(`${type.toUpperCase()} file download started`);
@@ -60,7 +60,7 @@ export function Dashboard() {
               size="lg" 
               variant="outline" 
               className="border-2"
-              onClick={() => handleDownload('zip')}
+              onClick={() => handleDownload('exe')}
             >
               <Download className="mr-2 w-5 h-5" />
               Download for Desktop
